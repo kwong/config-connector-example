@@ -1,0 +1,35 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: storagebucketallowedlocations
+spec:
+  crd:
+    spec:
+      names:
+        kind: StorageBucketAllowedLocations
+      validation:
+        openAPIV3Schema:
+          properties:
+            locations:
+              type: array
+              items: string
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package storagebucketallowedlocations
+        violation[{"msg": msg, "details": {"location": ""}}] {
+            not input.review.object.spec.location
+            msg := "missing location"
+        }
+     
+        violation[{"msg": msg, "details": {"location": location}}] {
+            location := input.review.object.spec.location
+            allowed_locations := input.parameters.locations
+
+            not contains(allowed_locations, location)
+            msg := sprintf("%v location not allowed", [location])
+        }
+
+        contains(s, e) {
+            s[_] = e
+        }

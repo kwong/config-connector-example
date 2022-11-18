@@ -1,0 +1,18 @@
+kind: Suite
+apiVersion: test.gatekeeper.sh/v1alpha1
+metadata:
+  name: allowedrepos
+tests:
+- name: bucket-tests
+  template: ../../templates/gcs/storage-bucket-allowed-locations.yaml
+  constraint: ../../constraints/gcs/allow-asia-regions.yaml
+  cases:
+  - name: example-disallowed
+    object: samples/example-disallowed.yaml
+    assertions:
+    - violations: yes
+
+  - name: example-allowed
+    object: samples/example-allowed.yaml
+    assertions:
+    - violations: no
