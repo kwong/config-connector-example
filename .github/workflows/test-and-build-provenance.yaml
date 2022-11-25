@@ -17,23 +17,23 @@ jobs:
         run: |
           make verify-gator
 
-  - name: package-policies
-        run: |
-          make package-policies
-      
-      - name: generate-hash
-        shell:
-        id: hash
-        run: |
-          echo "hash=$(sha256sum policies.tar.gz | base64 -w0)" >> "$GITHUB_OUTPUT"
+      - name: package-policies
+            run: |
+              make package-policies
+          
+          - name: generate-hash
+            shell:
+            id: hash
+            run: |
+              echo "hash=$(sha256sum policies.tar.gz | base64 -w0)" >> "$GITHUB_OUTPUT"
 
-  - name: upload artifact
-    uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8 # tag=v3.1.0
-      with:
-        name: policies.tar.gz
-        path: policies.tar.gz
-        if-no-files-found: error
-        retention-days: 5
+      - name: upload artifact
+        uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8 # tag=v3.1.0
+          with:
+            name: policies.tar.gz
+            path: policies.tar.gz
+            if-no-files-found: error
+            retention-days: 5
 
  provenance:
     needs: [run-tests-and-package]
