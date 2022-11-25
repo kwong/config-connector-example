@@ -43,7 +43,7 @@ jobs:
       contents: write
     uses: slsa-framework/slsa-github-generator/.github/workflows/generator_generic_slsa3.yml@v1.2.2
     with:
-      base64-subjects: "${{ needs.build.outputs.hash }}"
+      base64-subjects: "${{ needs.run-tests-and-package.outputs.hash }}"
       # Upload provenance to a new release
       upload-assets: true
 
