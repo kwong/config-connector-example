@@ -57,6 +57,8 @@ jobs:
       actions: read
       id-token: write
       contents: write
+      deployments: write
+      packages: write
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/')
     steps:
