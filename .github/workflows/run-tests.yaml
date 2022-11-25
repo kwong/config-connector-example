@@ -13,10 +13,12 @@ permissions:
   pull-requests: read
 
 jobs:
-  run-tests:
+  run-tests-and-package:
     runs-on: ubuntu-latest
-    name: "Verify assertions"
     steps:
-      - uses: actions/checkout@v2
-      - run: |
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: run-tests 
+        run: |
           make verify-gator
