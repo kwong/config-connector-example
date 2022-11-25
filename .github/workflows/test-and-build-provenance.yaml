@@ -22,7 +22,7 @@ jobs:
           make package-policies
       
       - name: generate-hash
-        shell:
+        shell: bash
         id: hash
         run: |
           echo "hash=$(sha256sum policies.tar.gz | base64 -w0)" >> "$GITHUB_OUTPUT"
