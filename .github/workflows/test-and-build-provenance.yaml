@@ -9,7 +9,7 @@ permissions:
 jobs:
   run-tests-and-package:
     outputs:
-      hashes: ${{ steps.hash.outputs.hash }}
+      hash: ${{ steps.hash.outputs.hash }}
     runs-on: ubuntu-latest
     steps:
       - name: checkout
