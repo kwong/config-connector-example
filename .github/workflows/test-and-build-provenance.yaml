@@ -25,7 +25,7 @@ jobs:
         shell: bash
         id: hash
         run: |
-          echo sha256sum policies.tar.gz
+          echo "hash=$(sha256sum policies.tar.gz | base64 -w0)"
           echo "hash=$(sha256sum policies.tar.gz | base64 -w0)" >> "$GITHUB_OUTPUT"
 
       - name: upload-artifact
