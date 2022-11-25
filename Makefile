@@ -6,3 +6,8 @@ test:
 .PHONY: verify-gator
 verify-gator: 
 	docker run -i -v ${PWD}:/data openpolicyagent/gator:v3.10.0 verify /data/... -v
+
+
+.PHONY: package-policies
+package-policies:
+	tar -czvf policies.tar.gz constraints/ templates/ tests/
