@@ -1,5 +1,6 @@
 name: test-and-build-provenance
 
+on: [workflow_dispatch]
 
 permissions:
   contents: read
